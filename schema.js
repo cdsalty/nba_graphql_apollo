@@ -1,5 +1,11 @@
 const axios = require("axios");
-const { GraphQLObjectType, GraphQLString, GraphQLInt } = require("graphql");
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLInt,
+  GraphQLList,
+  GraphQLSchema
+} = require("graphql");
 
 const TeamType = new GraphQLObjectType({
   name: "Team", // name of the object getting returned
@@ -27,4 +33,31 @@ const GameType = new GraphQLObjectType({
     visitor_team: { type: TeamType },
     status: { type: GraphQLString }
   })
+});
+
+// make data do something... tell app what endpoints to use...
+const RootQuery = new GraphQLObjectType({
+  name: "RootQueryType",
+  // fields are the querys you want. (example: if you want to know the scrore, date, etc... or if you want to click a team for more info)
+  fields: {
+    teams: {
+      type: new GraphQLList(TeamType), // expect an array of TeamType objects
+      async resolve(parents, args) {
+        try {
+          const response = await axios.get(
+            "https://www.balldontlie.io/api/v1/teams"
+          );
+          const { data } = await response;
+          // console.log(data.data);
+          return data.data;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+  }
+});
+
+module.exports = new GraphQLSchema({
+  query: RootQuery
 });
