@@ -40,6 +40,7 @@ const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   // fields are the querys you want. (example: if you want to know the scrore, date, etc... or if you want to click a team for more info)
   fields: {
+    // get all teams
     teams: {
       type: new GraphQLList(TeamType), // expect an array of TeamType objects
       async resolve(parents, args) {
@@ -48,7 +49,25 @@ const RootQuery = new GraphQLObjectType({
             "https://www.balldontlie.io/api/v1/teams"
           );
           const { data } = await response;
-          // console.log(data.data);
+          console.log(data.data);
+          return data.data;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    },
+    // get Specific Team (give an id and it should return specific information about that team)
+    team: {
+      type: TeamType,
+      args: {
+        id: { type: GraphQLInt }
+      },
+      async resolve(parents, args) {
+        try {
+          const response = await axios.get(
+            `https://www.balldontlie.io/api/v1/teams/${args.id}`
+          );
+          const data = await response;
           return data.data;
         } catch (error) {
           console.log(error);
@@ -61,3 +80,14 @@ const RootQuery = new GraphQLObjectType({
 module.exports = new GraphQLSchema({
   query: RootQuery
 });
+
+/*
+Team Query:
+{
+  team(id: 16) {
+    city
+    name
+    id
+  }
+}
+*/
