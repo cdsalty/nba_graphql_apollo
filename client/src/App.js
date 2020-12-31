@@ -6,7 +6,7 @@ import {
   from
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error"; // to handle errors
-import Test from "./Components/Test";
+import Games from "./Components/Games";
 import "./App.css";
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -32,7 +32,7 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <Test />
+      <Games />
     </ApolloProvider>
   );
 };
