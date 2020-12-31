@@ -5,13 +5,14 @@ import {
   HttpLink,
   from
 } from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
+import { onError } from "@apollo/client/link/error"; // to handle errors
+import Test from "./Components/Test";
 import "./App.css";
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
   if (graphqlErrors) {
     graphqlErrors.map(({ message, location, path }) => {
-      alert(`Graphql error ${message}`);
+      return alert(`Graphql error ${message}`);
     });
   }
 });
@@ -19,7 +20,7 @@ const errorLink = onError(({ graphqlErrors, networkError }) => {
 // Suggested wayt to start buiding your API for error handling?
 const link = from([
   errorLink,
-  new HttpLlink({ uri: "http://localhost:5000/graphql" })
+  new HttpLink({ uri: "http://localhost:5000/graphql" })
 ]);
 
 // to create connection
@@ -30,10 +31,9 @@ const client = new ApolloClient({
 
 const App = () => {
   return (
-    <div className="App">
-      <h1>Working</h1>
-      <h4>Ready to setup Apollo Boiler Plate</h4>
-    </div>
+    <ApolloProvider client={client}>
+      <Test />
+    </ApolloProvider>
   );
 };
 
