@@ -5,20 +5,27 @@
   align-items: center;
   margin-top: 12px;
   margin-bottom: 20px; */
-  margin: 5px;
+  /* margin: 5px; */
+  max-height: 170px;
+  padding-bottom: 50px;
+  padding-top: 50px;
   border-bottom: solid black 2px;
-  /* display: flex;
-  justify-content: center; */
+  /* align-content: center; */
   text-align: center;
-  padding: 20px;
 }
 
 .game_lineup {
   /* justify-content: center; */
   margin: 5px;
-  border-bottom: solid black 2px;
+  border-bottom: solid black 1px;
   /* display: flex;
   justify-content: center; */
   text-align: center;
   padding: 20px;
+  height: auto;
+}
+
+.label_name {
+  font-size: 21px;
+  font-style: bold;
 }

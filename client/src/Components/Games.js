@@ -45,7 +45,9 @@ const Games = () => {
   return (
     <div>
       <div className="games_header">
-        <label htmlFor="date">Show games for:</label>
+        <label htmlFor="date" className="label_name">
+          Select the date:{" "}
+        </label>
         <input
           type="date"
           value={date}
@@ -62,7 +64,7 @@ const Games = () => {
                 <h3 className="for_spacing">{game.home_team.full_name}</h3>
                 <h3 className="for_spacing"> @ </h3>
                 <h3 className="for_spacing">{game.visitor_team.full_name}</h3>
-                <h4>*{game.status}*</h4>
+                <h4>* {game.status} </h4>
               </div>
             );
           }
@@ -72,6 +74,7 @@ const Games = () => {
               <h3 className="for_spacing">
                 {game.home_team.full_name} : {game.home_team_score} pts
               </h3>
+              <h3 className="for_spacing"> @ </h3>
               <h3 className="for_spacing">
                 {game.visitor_team.full_name} : {game.visitor_team_score} pts
               </h3>
