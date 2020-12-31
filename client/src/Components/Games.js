@@ -30,6 +30,11 @@ const Games = () => {
     variables: { date }
   });
 
+  const handleChange = e => {
+    // console.log(e.target.value)
+    setDate(e.target.value);
+  };
+
   if (loading) return <p>Loading Your NBA Results</p>;
   if (error) console.log(error);
   console.log(data.allGames);
@@ -37,29 +42,29 @@ const Games = () => {
 
   return (
     <div>
-      <h4>Games Component</h4>
+      <label htmlFor="date">Show games for:</label>
+      <input
+        type="date"
+        value={date}
+        id="date"
+        onChange={handleChange}
+        pattern="\d{4}-\d{2}-\d{2}" // learned from lesson: 4 digit number / 2 digit number / 2 digit number
+      />
+      {data.allGames.map(game => {
+        return (
+          <div key={game.id} className="game_lineup">
+            <h3 className="for_spacing">
+              {game.home_team.full_name}:{game.home_team_score}
+            </h3>
+            <h3 className="for_spacing">
+              {game.visitor_team.full_name}:{game.visitor_team_score}
+            </h3>
+            <h4>{game.status}</h4>
+          </div>
+        );
+      })}
     </div>
   );
 };
 
 export default Games;
-
-/*
-GRAPHQL QUERY LAYOUT (which will be written again inside the games query)
-{
-  allGames(date: "2020-01-28") {
-    visitor_team_score
-    status
-    visitor_team {
-      full_name
-    }
-  }
-}
-
-
-- create a query name. (query AllGamesQuery)
-  - what does it take? takes the variable to search with; in this case, it will let the user select a date.
-    - graphql assigns "$" to indicate variables
-
-    useQuery takes the query and any variables such as in this case, the date; It doesn't have to take in any variables
-*/
