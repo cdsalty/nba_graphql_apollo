@@ -8,10 +8,18 @@
 }
 
 .container {
+  background: rgb(42, 111, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(42, 111, 255, 1) 0%,
+    rgba(255, 56, 46, 1) 96%
+  );
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-color: lightblue;
+  height: 200px;
+  justify-content: center;
+  color: white;
 }
 .App-logo {
   height: 40vmin;

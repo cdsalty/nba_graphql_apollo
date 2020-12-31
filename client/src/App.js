@@ -32,7 +32,10 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <Games />
+      <div className="container">
+        <p>HomePage</p>
+        <Games />
+      </div>
     </ApolloProvider>
   );
 };
