@@ -35,12 +35,11 @@ const Games = () => {
     // only to run when the date changes
   }, [date]);
 
-  // the useQuery hook is used to populate data to the component
+  // the useQuery hook is used to populate data to the component // STANDARD...
   const { loading, error, data } = useQuery(ALL_GAMES_QUERY, {
     variables: { date }
   });
-
-  if (loading) return <p>Loading Your NBA Results</p>;
+  if (loading) return <p>Loading Your Game Info</p>;
   if (error) console.log(error);
   // console.log(data.allGames);
 
