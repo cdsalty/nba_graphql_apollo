@@ -1,16 +1,26 @@
-* {
+html,
+body {
+  min-height: 100%;
   margin: 0;
   padding: 0;
-  /* display: border-box; */
 }
-
-.container {
+body {
+  background-size: cover;
   background: rgb(42, 111, 255);
   background: linear-gradient(
     90deg,
     rgba(42, 111, 255, 1) 0%,
     rgba(255, 56, 46, 1) 96%
   );
+}
+
+.container {
+  /* background: rgb(42, 111, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(42, 111, 255, 1) 0%,
+    rgba(255, 56, 46, 1) 96%
+  ); */
   color: white;
 }
 

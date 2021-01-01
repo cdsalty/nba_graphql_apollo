@@ -5,9 +5,13 @@ import {
   HttpLink,
   from
 } from "@apollo/client";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { onError } from "@apollo/client/link/error"; // to handle errors
 import Games from "./Components/Games";
+import Team from "./Components/Team";
+// import nba from "./nba.png";
 import "./App.css";
+import NavBar from "./Components/NavBar";
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
   if (graphqlErrors) {
@@ -32,12 +36,32 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <ApolloProvider client={client}>
+      <Router>
+        <div className="container">
+          {/* <div className="logo_holder">
+            <img src={nba} alt="NBA Logo" />
+          </div> */}
+          <Route exact path="/" component={Games} />
+          <Route exact path="/teams/:id" component={Team} />
+        </div>
+      </Router>
+      <NavBar />
+    </ApolloProvider>
+  );
+};
+
+export default App;
+
+/*
+Previous setup before adding the router
+return (
+    <ApolloProvider client={client}>
       <div className="container">
         <p>HomePage</p>
         <Games />
       </div>
     </ApolloProvider>
   );
-};
 
-export default App;
+
+*/

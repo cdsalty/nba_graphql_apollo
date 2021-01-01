@@ -5,6 +5,7 @@ import moment from "moment"; // for dates
 import "./games.css";
 
 const Games = () => {
+  // allGames will take in a date and the format will have to be just as so...
   const ALL_GAMES_QUERY = gql`
     query AllGamesQuery($date: String!) {
       allGames(date: $date) {
@@ -24,29 +25,35 @@ const Games = () => {
     }
   `;
 
-  // to call a new date, moment() => the date is matching up to the api
+  // HOOKS
   const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
+  // to prevent error on reset and refresh back to the current day's date
+  useEffect(() => {
+    if (!date) {
+      setDate(moment().format("YYYY-MM-DD"));
+    }
+    // only to run when the date changes
+  }, [date]);
 
-  // make use of the useQuery hook to populate the component
+  // the useQuery hook is used to populate data to the component
   const { loading, error, data } = useQuery(ALL_GAMES_QUERY, {
     variables: { date }
   });
 
-  const handleChange = e => {
-    // console.log(e.target.value)
-    setDate(e.target.value);
-  };
-
   if (loading) return <p>Loading Your NBA Results</p>;
   if (error) console.log(error);
-  console.log(data.allGames);
-  // by console logging the data, you see how the data is laid out in order to call on it... In this case; data.allGames...
+  // console.log(data.allGames);
+
+  // Listeners
+  const handleChange = e => {
+    setDate(e.target.value);
+  };
 
   return (
     <div>
       <div className="games_header">
         <label htmlFor="date" className="label_name">
-          Select the date:{" "}
+          NBA Games for:{" "}
         </label>
         <input
           type="date"
