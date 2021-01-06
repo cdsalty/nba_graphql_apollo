@@ -24,7 +24,7 @@ const Team = props => {
   console.log(data);
   return (
     <div>
-      <h1>The "Team" Component</h1>
+      <h1>{`The ${full_name} Page`}</h1>
     </div>
   );
 };
