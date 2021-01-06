@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { onError } from "@apollo/client/link/error"; // to handle errors
 import Games from "./Components/Games";
 import Team from "./Components/Team";
-// import nba from "./nba.png";
 import "./App.css";
 import NavBar from "./Components/NavBar";
 
@@ -37,15 +36,12 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <NavBar />
         <div className="container">
-          {/* <div className="logo_holder">
-            <img src={nba} alt="NBA Logo" />
-          </div> */}
           <Route exact path="/" component={Games} />
           <Route exact path="/teams/:id" component={Team} />
         </div>
       </Router>
-      <NavBar />
     </ApolloProvider>
   );
 };

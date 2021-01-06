@@ -1,17 +1,13 @@
 .games_header {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 12px;
-  margin-bottom: 20px; */
-  /* margin: 5px; */
+  display: flex;
   max-height: 170px;
   padding-bottom: 50px;
   padding-top: 50px;
   border-bottom: solid black 2px;
-  /* align-content: center; */
+  justify-content: center;
+  align-content: center;
   text-align: center;
+  font-size: 28px;
 }
 
 .game_lineup {
@@ -23,9 +19,9 @@
   text-align: center;
   padding: 20px;
   height: auto;
+  font-size: 21px;
 }
 
 .label_name {
-  font-size: 21px;
   font-style: bold;
 }

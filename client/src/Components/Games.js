@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import moment from "moment"; // for dates
 import "./games.css";
 
@@ -55,6 +55,7 @@ const Games = () => {
           NBA Games for:{" "}
         </label>
         <input
+          className="input_position"
           type="date"
           value={date}
           id="date"
@@ -67,7 +68,12 @@ const Games = () => {
           if (game.status.includes("PM")) {
             return (
               <div key={game.id} className="game_lineup">
-                <h3 className="for_spacing">{game.home_team.full_name}</h3>
+                <h3 className="for_spacing">
+                  <Link to={`teams/${game.home_team.id}`}>
+                    {game.home_team.full_name}
+                  </Link>
+                  {game.home_team.full_name}
+                </h3>
                 <h3 className="for_spacing"> @ </h3>
                 <h3 className="for_spacing">{game.visitor_team.full_name}</h3>
                 <h4>* {game.status} </h4>
@@ -78,7 +84,10 @@ const Games = () => {
           return (
             <div key={game.id} className="game_lineup">
               <h3 className="for_spacing">
-                {game.home_team.full_name} : {game.home_team_score} pts
+                <Link to={`teams/${game.home_team.id}`}>
+                  {game.home_team.full_name}
+                </Link>
+                :{game.home_team_score} pts
               </h3>
               <h3 className="for_spacing"> @ </h3>
               <h3 className="for_spacing">
@@ -94,3 +103,9 @@ const Games = () => {
 };
 
 export default Games;
+
+/*
+
+By bringing in the Link from react-router-dom, I can refer to each team's specific page
+
+*/

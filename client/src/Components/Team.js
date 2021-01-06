@@ -2,6 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import { link } from "react-router-dom";
 import "./teams.css";
 
+// need props to pass down the params for the :id in the url
 const Team = props => {
   const TEAM_QUERY = gql`
     query TeamQuery($id: Int!) {
@@ -12,17 +13,18 @@ const Team = props => {
       }
     }
   `;
-  let id = props.match.params.id;
+  let id = props.match.params.id; // will be set to the ":id" inside the url
   id = parseInt(id);
-  // console.log(props);
+
   const { loading, error, data } = useQuery(TEAM_QUERY, { variables: { id } });
   if (loading) return <p>Loading...</p>;
   if (error) console.log(error);
   const { full_name, division, conference } = data.team;
-  console.log(full_name);
+  console.log("logging from  Team.js" + full_name);
+  console.log(data);
   return (
     <div>
-      <h1>TEAM COMPONENT</h1>
+      <h1>The "Team" Component</h1>
     </div>
   );
 };
@@ -96,4 +98,11 @@ Props returns
       Now, once you log props, you will have an object for history, location, match, etc
 
       localhost:3000/teams/4   
+
+- Taking in an 'id'. The id is a varialble which are equal to the props beinbg brought in... 
+  The goal of the this component, the $20 dollar question... How do you update the 'team id' in the url to get that specific team's info?
+  console.log(props)
+  you get back history, location, match
+  inside match, you get the id information
+    -> props.match.params.id
 */
